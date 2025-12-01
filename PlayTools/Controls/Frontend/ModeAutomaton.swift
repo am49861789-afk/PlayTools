@@ -35,11 +35,11 @@ public class ModeAutomaton {
         guard settings.keymapping else {
             return
         }
-
         EditorController.shared.switchMode()
-
         if mode == .editor && !EditorController.shared.editorMode {
-            mode.set(.cameraRotate)
+            // 修改：将 .cameraRotate 改为 .arbitraryClick
+            // 这样关闭编辑器后，鼠标依然可见且可移动，同时键盘映射保持生效
+            mode.set(.arbitraryClick)
             ActionDispatcher.build()
             Toucher.writeLog(logMessage: "editor closed")
         } else if EditorController.shared.editorMode {
